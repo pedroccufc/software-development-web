@@ -1,0 +1,60 @@
+.dinner-list {
+	max-width: 700px;
+	margin: 20px auto 0;
+	padding: 0 20px;
+}
+
+.dinner-list article {
+	background: #FFF;
+	border: 1px solid #DDD;
+	border-radius: 5px;
+	padding: 20px;
+	margin-bottom: 20px;
+	background-color: white;
+}
+
+.dinner-list article p {
+	font-size: 16px;
+	color: black;
+	margin-top: 5px;
+	line-height: 24px;
+}
+
+.dinner-list article h1 {
+	color: black;
+}
+
+.dinner-list .actions {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 20px;
+}
+
+.dinner-list .actions button {
+	padding: 10px;
+	border-radius: 5px;
+	border: 0;
+	background: #da552f;
+	color: white;
+	font-size: 16px;
+	font-weight: bold;
+	cursor: pointer;
+	background-color: black;
+}
+
+.dinner-list .actions button[disabled] {
+	opacity: 0.5;
+	cursor: default;
+}
+
+.dinner-list .actions button:hover {
+	opacity: 0.7;
+}
+
+.dinner-list .actions button[disabled]:hover {
+	opacity: 0.5;
+}
+
+.form-inline {
+	justify-content: space-between;
+}

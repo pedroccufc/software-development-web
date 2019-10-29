@@ -1,0 +1,32 @@
+body {
+	margin: 0;
+}
+
+.navbar {
+	display: flex;
+	-webkit-box-align: center;
+	align-items: center;
+	padding: 10px 5px;
+}
+
+.menu ul {
+	margin: 0;
+	background-color: #343a40;
+	list-style: none;
+	text-align: left;
+}
+
+.menu ul li {
+	display: inline;
+}
+
+.menu ul li a {
+	padding: 10px 10px;
+	display: inline-block;
+	color: #212529;
+	text-decoration: none;
+}
+
+.menu ul li a:hover {
+	color: white;
+}

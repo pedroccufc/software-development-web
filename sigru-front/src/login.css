@@ -1,0 +1,69 @@
+.form-signin {
+	width: 100%;
+	max-width: 330px;
+	padding: 15px;
+	margin: 0 auto;
+}
+
+.form-signin .checkbox {
+	font-weight: 400;
+	color: white;
+}
+
+h1 {
+	font-family: inherit;
+}
+
+.h3 {
+	font-size: 24px;
+	text-align: center;
+}
+
+.mb-3 {
+	margin: 10px;
+	margin-bottom: 10px;
+}
+
+.font-weight-normal {
+	font-weight: 400;
+}
+
+.sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	overflow: hidden;
+	clip: rect(0,0,0,0);
+	white-space: nowrap;
+	clip-path: inset(50%);
+	border: 0;
+}
+
+h1 {
+	color: white;
+}
+
+input {
+	overflow: visible;
+}
+
+.text-center {
+	text-align: center;
+}
+
+.mb-3 {
+	margin-bottom: 10px;
+}
+
+.mt-5 {
+	margin-top: 20px;
+}
+
+.text-muted {
+	color: #6c757d;
+}
+
+body {
+	line-height: 1.5;
+}
