@@ -65,7 +65,7 @@ The Express app is defined in [`sigru-back/src/app.js`](sigru-back/src/app.js), 
 
 From `sigru-back`, run `npm test` to execute route-registration checks and HTTP integration tests using **real Express request handling with mocked model operations**. These tests do **not** exercise a live MongoDB server or validate persistence.
 
-A [GitHub Actions workflow](.github/workflows/sigru-backend.yml) installs the existing locked dependencies and runs the tests on Node.js 20. It may expose compatibility or installation issues with this historical dependency set.
+A [GitHub Actions workflow](.github/workflows/sigru-backend.yml) installs the existing locked dependencies and runs the tests on Node.js 20 and 22. It may expose compatibility or installation issues with this historical dependency set.
 
 ### Dependency modernization strategy
 
