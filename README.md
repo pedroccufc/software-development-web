@@ -38,7 +38,7 @@ This repository contains older dependencies. Check compatibility with your Node.
 
 ### 1. Back-end
 
-Start a local MongoDB instance on `localhost:27017`. The existing `server.js` connects to `mongodb://localhost:27017/sigru` and serves requests on port **3001**.
+Start a local MongoDB instance on `localhost:27017`. The `server.js` defaults to `mongodb://localhost:27017/sigru` and port **3001**; these can be overridden with `MONGODB_URI` and `PORT`.
 
 ```bash
 cd sigru-back
@@ -56,7 +56,7 @@ npm ci
 npm start
 ```
 
-The front-end uses Create React App and defaults to port **3000**. Its API client is configured for `http://localhost:3001/` in `sigru-front/src/services/api.js`.
+The front-end uses Create React App and defaults to port **3000**. Its API client defaults to `http://localhost:3001/` in `sigru-front/src/services/api.js`; set `REACT_APP_API_URL` before starting or building to override it.
 
 ## Source organization
 
@@ -75,7 +75,9 @@ The front-end uses Create React App and defaults to port **3000**. Its API clien
 
 - `node_modules` was removed from Git tracking and is excluded by `.gitignore`. Dependencies are restored locally via each component's `package-lock.json`.
 - The repository remains an **academic snapshot**, not a production deployment.
-- The current API routes include duplicate `GET /breakfast` declarations; endpoint behavior should be reviewed before further development.
+- Breakfast detail routes now consistently use `/:id`, matching the lunch and dinner endpoints.
+- Route mappings can be checked without a database using `cd sigru-back && npm test` (requires a Node.js version supporting `node:test`).
+- These tests verify route registration, not full database-backed integration behavior.
 - Dependency updates and tests should be carried out in a separate, verified modernization effort rather than silently changing the original coursework.
 
 ## Attribution
