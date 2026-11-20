@@ -1,68 +1,50 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# SIGRU — Front-end
 
-## Available Scripts
+Interface React para consultar o cardápio de café da manhã, almoço e jantar do SIGRU.
 
-In the project directory, you can run:
+## Requisitos
 
-### `npm start`
+- Node.js 22 (versão LTS atual suportada pelo Vite 7)
+- npm
+- API do SIGRU disponível para consultas
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Desenvolvimento
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+```bash
+npm ci
+npm run dev
+```
 
-### `npm test`
+O Vite inicia um servidor de desenvolvimento. A API é acessada em
+`http://localhost:3001/` por padrão. Configure `VITE_API_URL` em
+`.env.local` para usar outro endereço:
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```dotenv
+VITE_API_URL=http://localhost:3001/
+```
 
-### `npm run build`
+**Mudança de configuração:** a antiga variável `REACT_APP_API_URL`
+deve ser substituída por `VITE_API_URL`. Nunca coloque secrets
+nessa variável: ela é incorporada ao JavaScript do navegador.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Build e auditoria
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+```bash
+npm run build
+npm audit --audit-level=high
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+O build estático é produzido em `build/`, mantendo o diretório
+de saída usado anteriormente pelo Create React App.
 
-### `npm run eject`
+## Notas de migração
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+A ferramenta de build foi migrada de `react-scripts` (Webpack 4) para
+Vite, preservando a estrutura dos componentes e a versão do React nesta
+etapa. O arquivo `vite.config.mjs` dá suporte temporário aos
+componentes legados com JSX em arquivos `.js`, evitando renomeações
+não relacionadas à correção de segurança.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+O projeto ainda depende de uma API externa e não possui uma suíte
+de testes automatizados de interface. O build em CI não substitui
+testes de navegação e comportamento no navegador.
