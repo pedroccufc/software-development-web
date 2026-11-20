@@ -5,6 +5,7 @@ on:
       - security/audit-sigru-frontend
     paths:
       - .github/workflows/frontend-lockfile-refresh.yml
+      - apps/web/package.json
   workflow_dispatch:
 
 permissions:
