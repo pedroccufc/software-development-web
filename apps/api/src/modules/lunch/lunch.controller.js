@@ -6,7 +6,7 @@ module.exports = {
 	// Lista almoços
 	async index(req, res) {
 		const { page = 1 } = req.query;
-		const lunchs = await Lunch.paginate({}, { page, limit: 1 });
+		const lunchs = await Lunch.paginate({}, { page, limit: 1, customLabels: { totalDocs: 'total', totalPages: 'pages' } });
 
 		return res.json(lunchs);
 	},
@@ -34,7 +34,7 @@ module.exports = {
 
 	// Deleta almoço
 	async destroy(req, res) {
-		await Lunch.findByIdAndRemove(req.params.id);
+		await Lunch.findByIdAndDelete(req.params.id);
 
 		return res.send();
 	}

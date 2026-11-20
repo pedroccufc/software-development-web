@@ -11,6 +11,9 @@ on:
       - ".github/workflows/sigru-backend.yml"
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   backend-tests:
     strategy:
@@ -18,9 +21,21 @@ jobs:
       matrix:
         node-version: [20, 22]
     runs-on: ubuntu-latest
+    services:
+      mongodb:
+        image: mongo:7
+        ports:
+          - 27017:27017
+        options: >-
+          --health-cmd "mongosh --quiet --eval 'db.adminCommand({ ping: 1 }).ok' || exit 1"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 10
     defaults:
       run:
         working-directory: apps/api
+    env:
+      TEST_MONGODB_URI: mongodb://127.0.0.1:27017/sigru_test
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -30,5 +45,11 @@ jobs:
           cache-dependency-path: apps/api/package-lock.json
       - name: Install locked dependencies
         run: npm ci --no-audit --no-fund
-      - name: Run unit and HTTP integration tests
+      - name: Run unit and mocked HTTP integration tests
         run: npm test
+      - name: Run real MongoDB integration tests
+        run: npm run test:db
+      - name: Audit production dependencies (high or critical)
+        run: npm audit --omit=dev --audit-level=high
+      - name: Audit full dependency tree (high or critical)
+        run: npm audit --audit-level=high
