@@ -1,36 +1,86 @@
 <div align="center">
 
-# Web Software Development
+# SIGRU · Web Software Development
 
-**JavaScript · Front-end · Back-end**
+**University coursework · React front-end · Express API · MongoDB**
 
-University web development material organized around a front-end and a back-end codebase.
+An academic web application organized into independent front-end and back-end components.
 
 </div>
 
 ---
 
-## What's inside
+## Repository structure
 
-| Folder or file | Contents |
-| :--- | :--- |
-| [sigru-front](<sigru-front>) | Front-end source code and project README |
-| [sigru-back](<sigru-back>) | Back-end source code, `server.js`, package configuration, and requirements document |
-
-## Exploring the project
-
-The back-end includes `Especificações de Requisitos de Software.pdf`. Both components have their own dependencies. Consult the relevant `package.json` and project documentation before running.
-
-Clone the repository to explore the source locally:
-
-```bash
-git clone https://github.com/pedroccufc/software-development-web.git
-cd software-development-web
+```text
+software-development-web/
+├── sigru-front/          # React application
+│   ├── public/
+│   ├── src/
+│   ├── package.json
+│   └── package-lock.json
+├── sigru-back/           # Node.js / Express API
+│   ├── src/
+│   │   ├── controllers/
+│   │   ├── models/
+│   │   └── routes.js
+│   ├── server.js
+│   ├── package.json
+│   ├── package-lock.json
+│   └── Especificações de Requisitos de Software.pdf
+├── .gitignore
+└── README.md
 ```
 
-## Context & attribution
+## Local setup (historical project)
 
-Educational repository; the README does not claim deployment, operational availability, or production readiness.
+This repository contains older dependencies. Check compatibility with your Node.js and MongoDB versions before attempting to run it. The following commands reflect the project's existing scripts; **they have not been validated in a running environment**.
+
+### 1. Back-end
+
+Start a local MongoDB instance on `localhost:27017`. The existing `server.js` connects to `mongodb://localhost:27017/sigru` and serves requests on port **3001**.
+
+```bash
+cd sigru-back
+npm ci
+npm run dev
+```
+
+### 2. Front-end
+
+In a separate terminal:
+
+```bash
+cd sigru-front
+npm ci
+npm start
+```
+
+The front-end uses Create React App and defaults to port **3000**. Its API client is configured for `http://localhost:3001/` in `sigru-front/src/services/api.js`.
+
+## Source organization
+
+| Area | Location |
+| :--- | :--- |
+| React application entry and routes | [sigru-front/src](sigru-front/src) |
+| React pages | [sigru-front/src/pages](sigru-front/src/pages) |
+| API client | [sigru-front/src/services/api.js](sigru-front/src/services/api.js) |
+| Express bootstrap | [sigru-back/server.js](sigru-back/server.js) |
+| API routes | [sigru-back/src/routes.js](sigru-back/src/routes.js) |
+| Controllers | [sigru-back/src/controllers](sigru-back/src/controllers) |
+| MongoDB models | [sigru-back/src/models](sigru-back/src/models) |
+| Assignment requirements | [Requirements PDF](<sigru-back/Especificações de Requisitos de Software.pdf>) |
+
+## Maintenance notes
+
+- `node_modules` was removed from Git tracking and is excluded by `.gitignore`. Dependencies are restored locally via each component's `package-lock.json`.
+- The repository remains an **academic snapshot**, not a production deployment.
+- The current API routes include duplicate `GET /breakfast` declarations; endpoint behavior should be reviewed before further development.
+- Dependency updates and tests should be carried out in a separate, verified modernization effort rather than silently changing the original coursework.
+
+## Attribution
+
+This project is presented as university coursework. No production use, deployment, or independent authorship of all included frameworks and dependencies is claimed.
 
 ---
 
@@ -38,6 +88,6 @@ Educational repository; the README does not claim deployment, operational availa
 
 **Pedro Jr. · pedrojr.ds**
 
-[Back to GitHub profile](https://github.com/pedroccufc)
+[GitHub profile](https://github.com/pedroccufc)
 
 </div>
