@@ -12,7 +12,7 @@ routes.put("/lunch/:id", LunchController.update);
 routes.delete("/lunch/:id", LunchController.destroy);
 
 routes.get('/breakfast', BreakfastController.index);
-routes.get('/breakfast', BreakfastController.show);
+routes.get('/breakfast/:id', BreakfastController.show);
 routes.post('/breakfast', BreakfastController.store);
 routes.put('/breakfast', BreakfastController.update);
 routes.delete('/breakfast', BreakfastController.destroy);
