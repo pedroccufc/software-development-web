@@ -6,7 +6,8 @@
   "scripts": {
     "test": "node --test tests/unit/*.test.js tests/integration/*.test.js",
     "dev": "nodemon src/server.js",
-    "start": "node src/server.js"
+    "start": "node src/server.js",
+    "test:db": "node --test tests/database/*.test.js"
   },
   "keywords": [],
   "author": "",
