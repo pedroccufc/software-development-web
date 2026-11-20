@@ -13,6 +13,10 @@ on:
 
 jobs:
   backend-tests:
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: [20, 22]
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -23,7 +27,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: ${{ matrix.node-version }}
           cache: npm
           cache-dependency-path: sigru-back/package-lock.json
       - name: Install existing locked dependencies
