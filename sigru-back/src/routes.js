@@ -14,8 +14,8 @@ routes.delete("/lunch/:id", LunchController.destroy);
 routes.get('/breakfast', BreakfastController.index);
 routes.get('/breakfast/:id', BreakfastController.show);
 routes.post('/breakfast', BreakfastController.store);
-routes.put('/breakfast', BreakfastController.update);
-routes.delete('/breakfast', BreakfastController.destroy);
+routes.put('/breakfast/:id', BreakfastController.update);
+routes.delete('/breakfast/:id', BreakfastController.destroy);
 
 routes.get('/dinner', DinnerController.index);
 routes.get('/dinner/:id', DinnerController.show);
