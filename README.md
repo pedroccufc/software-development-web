@@ -25,6 +25,7 @@ software-development-web/
 │   │   ├── models/
 │   │   └── routes.js
 │   ├── server.js
+│   ├── tests/           # Route and HTTP tests
 │   ├── package.json
 │   ├── package-lock.json
 │   └── Especificações de Requisitos de Software.pdf
@@ -58,6 +59,18 @@ npm start
 
 The front-end uses Create React App and defaults to port **3000**. Its API client defaults to `http://localhost:3001/` in `sigru-front/src/services/api.js`; set `REACT_APP_API_URL` before starting or building to override it.
 
+## Architecture and checks
+
+The Express app is defined in [`sigru-back/src/app.js`](sigru-back/src/app.js), separate from [`sigru-back/server.js`](sigru-back/server.js), which connects to MongoDB and starts the HTTP listener only when the connection succeeds.
+
+From `sigru-back`, run `npm test` to execute route-registration checks and HTTP integration tests using **real Express request handling with mocked model operations**. These tests do **not** exercise a live MongoDB server or validate persistence.
+
+A [GitHub Actions workflow](.github/workflows/sigru-backend.yml) installs the existing locked dependencies and runs the tests on Node.js 20. It may expose compatibility or installation issues with this historical dependency set.
+
+### Dependency modernization strategy
+
+The original 2019-era dependency versions and lockfiles are intentionally preserved for now. Upgrading Express, Mongoose, React, and their tooling together would risk incompatible APIs. Upgrade in small independent changes only after CI passes, and update the matching lockfile with each package change.
+
 ## Source organization
 
 | Area | Location |
@@ -76,8 +89,8 @@ The front-end uses Create React App and defaults to port **3000**. Its API clien
 - `node_modules` was removed from Git tracking and is excluded by `.gitignore`. Dependencies are restored locally via each component's `package-lock.json`.
 - The repository remains an **academic snapshot**, not a production deployment.
 - Breakfast detail routes now consistently use `/:id`, matching the lunch and dinner endpoints.
-- Route mappings can be checked without a database using `cd sigru-back && npm test` (requires a Node.js version supporting `node:test`).
-- These tests verify route registration, not full database-backed integration behavior.
+- Run `cd sigru-back && npm test` on a recent Node.js version; tests exercise both route registration and HTTP handling with mocked model calls.
+- Full end-to-end behavior with a live MongoDB database and legacy dependency compatibility still require validation.
 - Dependency updates and tests should be carried out in a separate, verified modernization effort rather than silently changing the original coursework.
 
 ## Attribution
