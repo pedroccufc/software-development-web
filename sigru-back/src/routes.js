@@ -20,7 +20,7 @@ routes.delete('/breakfast/:id', BreakfastController.destroy);
 routes.get('/dinner', DinnerController.index);
 routes.get('/dinner/:id', DinnerController.show);
 routes.post('/dinner', DinnerController.store);
-routes.put('/dinner', DinnerController.update);
-routes.delete('/dinner', DinnerController.destroy);
+routes.put('/dinner/:id', DinnerController.update);
+routes.delete('/dinner/:id', DinnerController.destroy);
 
 module.exports = routes;
