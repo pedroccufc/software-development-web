@@ -50,3 +50,26 @@ jobs:
         run: npm ci --no-audit --no-fund
       - name: Build frontend
         run: npm run build
+
+  browser-smoke:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: apps/web
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: apps/web/package-lock.json
+      - name: Install locked frontend dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Build production frontend
+        run: npm run build
+      - name: Install isolated Playwright test runner
+        run: npm install --prefix "$RUNNER_TEMP/sigru-playwright" --no-save --package-lock=false --ignore-scripts --no-audit --no-fund playwright@1.56.1
+      - name: Install Chromium test browser
+        run: node "$RUNNER_TEMP/sigru-playwright/node_modules/playwright/cli.js" install --with-deps chromium
+      - name: Run browser smoke against isolated fixture API
+        run: PLAYWRIGHT_PATH="$RUNNER_TEMP/sigru-playwright/node_modules/playwright" node tests/browser/smoke.cjs
