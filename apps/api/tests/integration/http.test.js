@@ -57,14 +57,14 @@ test('GET /breakfast collection does not accidentally call the detail handler', 
 test('PUT and DELETE /breakfast/:id invoke the intended model methods', async () => {
   const Breakfast = mongoose.model('Breakfast');
   const oldUpdate = Breakfast.findByIdAndUpdate;
-  const oldRemove = Breakfast.findByIdAndRemove;
+  const oldRemove = Breakfast.findByIdAndDelete;
   const id = '507f1f77bcf86cd799439011';
   const called = [];
   Breakfast.findByIdAndUpdate = async (key, patch) => {
     called.push(['update', key, patch.drinks]);
     return { _id: key, drinks: patch.drinks };
   };
-  Breakfast.findByIdAndRemove = async (key) => {
+  Breakfast.findByIdAndDelete = async (key) => {
     called.push(['delete', key]);
     return { _id: key };
   };
@@ -82,6 +82,6 @@ test('PUT and DELETE /breakfast/:id invoke the intended model methods', async ()
     });
   } finally {
     Breakfast.findByIdAndUpdate = oldUpdate;
-    Breakfast.findByIdAndRemove = oldRemove;
+    Breakfast.findByIdAndDelete = oldRemove;
   }
 });
