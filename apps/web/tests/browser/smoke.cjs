@@ -74,10 +74,10 @@ async function awaitPreview(preview) {
     assert.equal(await page.getByText("Bebidas:").count(), 1);
     assert.equal(await page.locator(".breakfast-list article").count(), 1);
     await page.locator(".breakfast-list").getByRole("button", { name: "Próximo" }).click();
-    await page.getByText("juice", { exact: true }).waitFor();
+    await page.locator(".breakfast-list article p").filter({ hasText: "juice" }).waitFor();
     assert.equal(new URL(page.url()).pathname, "/", "Pagination must not reload/navigate");
     await page.locator(".breakfast-list").getByRole("button", { name: "Anterior" }).click();
-    await page.getByText("water", { exact: true }).waitFor();
+    await page.locator(".breakfast-list article p").filter({ hasText: "water" }).waitFor();
     assert.deepEqual(browserErrors, [], "Browser runtime must not throw uncaught errors");
     console.log("Browser smoke passed: login screen, meal sections, API data and pagination.");
   } finally {
