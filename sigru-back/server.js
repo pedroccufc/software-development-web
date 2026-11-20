@@ -1,27 +1,14 @@
-// Importando a dependencia express
-const express = require("express");
-
-// Permite o acesso de outros domínios
-const cors = require("cors");
-
-// Para usar o Banco de Dados
 const mongoose = require("mongoose");
+const app = require("./src/app");
 
-// Para fazer todos os require necessários
-const requireDir = require("require-dir");
+const mongoUri = process.env.MONGODB_URI || "mongodb://localhost:27017/sigru";
+const port = Number(process.env.PORT) || 3001;
 
-// Iniciando o app
-const app = express();
-app.use(express.json());
-app.use(cors());
-
-// Iniciando o Banco de Dados
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/sigru", 
-	{ useNewUrlParser: true, useUnifiedTopology: true }
-);
-requireDir("./src/models");
-
-// Rotas
-app.use("/", require("./src/routes"));
-
-app.listen(Number(process.env.PORT) || 3001);
+mongoose.connect(mongoUri, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => {
+    app.listen(port, () => console.log("SIGRU API listening on port " + port));
+  })
+  .catch((error) => {
+    console.error("Failed to connect to MongoDB:", error);
+    process.exitCode = 1;
+  });
