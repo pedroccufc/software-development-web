@@ -16,7 +16,7 @@ app.use(express.json());
 app.use(cors());
 
 // Iniciando o Banco de Dados
-mongoose.connect("mongodb://localhost:27017/sigru", 
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/sigru", 
 	{ useNewUrlParser: true, useUnifiedTopology: true }
 );
 requireDir("./src/models");
@@ -24,4 +24,4 @@ requireDir("./src/models");
 // Rotas
 app.use("/", require("./src/routes"));
 
-app.listen(3001);
+app.listen(Number(process.env.PORT) || 3001);
