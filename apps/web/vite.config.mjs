@@ -1,4 +1,4 @@
-import { defineConfig, transformWithEsbuild } from "vite";
+import { defineConfig, loadEnv, transformWithEsbuild } from "vite";
 import react from "@vitejs/plugin-react";
 
 // Existing JSX lives in .js files. Preserve paths during the tooling migration.
@@ -18,7 +18,13 @@ function legacyJsx() {
   };
 }
 
-export default defineConfig({
-  plugins: [legacyJsx(), react({ jsxRuntime: "classic" })],
-  build: { outDir: "build" }
+export default defineConfig(({ mode }) => {
+  const env = loadEnv(mode, process.cwd(), "");
+  return {
+    plugins: [legacyJsx(), react({ jsxRuntime: "classic" })],
+    define: {
+      "import.meta.env.REACT_APP_API_URL": JSON.stringify(env.REACT_APP_API_URL || "")
+    },
+    build: { outDir: "build" }
+  };
 });
