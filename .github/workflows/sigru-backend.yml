@@ -3,11 +3,11 @@ name: SIGRU backend checks
 on:
   push:
     paths:
-      - "sigru-back/**"
+      - "apps/api/**"
       - ".github/workflows/sigru-backend.yml"
   pull_request:
     paths:
-      - "sigru-back/**"
+      - "apps/api/**"
       - ".github/workflows/sigru-backend.yml"
   workflow_dispatch:
 
@@ -20,17 +20,15 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: sigru-back
+        working-directory: apps/api
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v4
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
           cache: npm
-          cache-dependency-path: sigru-back/package-lock.json
-      - name: Install existing locked dependencies
+          cache-dependency-path: apps/api/package-lock.json
+      - name: Install locked dependencies
         run: npm ci --no-audit --no-fund
-      - name: Run route and HTTP integration tests
+      - name: Run unit and HTTP integration tests
         run: npm test

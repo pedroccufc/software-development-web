@@ -1,7 +1,7 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
 const mongoose = require('mongoose');
-const app = require('../src/app');
+const app = require('../../src/app');
 
 // Exercise the real Express router over HTTP without contacting MongoDB.
 // Model methods are restored after each test.

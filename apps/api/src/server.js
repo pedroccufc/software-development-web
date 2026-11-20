@@ -1,10 +1,9 @@
-const mongoose = require("mongoose");
-const app = require("./src/app");
+const app = require("./app");
+const { connectDatabase } = require("./config/database");
 
-const mongoUri = process.env.MONGODB_URI || "mongodb://localhost:27017/sigru";
 const port = Number(process.env.PORT) || 3001;
 
-mongoose.connect(mongoUri, { useNewUrlParser: true, useUnifiedTopology: true })
+connectDatabase()
   .then(() => {
     app.listen(port, () => console.log("SIGRU API listening on port " + port));
   })
