@@ -23,9 +23,10 @@ O Vite inicia um servidor de desenvolvimento. A API é acessada em
 VITE_API_URL=http://localhost:3001/
 ```
 
-**Mudança de configuração:** a antiga variável `REACT_APP_API_URL`
-deve ser substituída por `VITE_API_URL`. Nunca coloque secrets
-nessa variável: ela é incorporada ao JavaScript do navegador.
+**Compatibilidade:** `REACT_APP_API_URL` continua aceito para evitar
+quebrar implantações existentes, mas `VITE_API_URL` é o nome recomendado.
+Nunca coloque secrets nessas variáveis: o endereço é incorporado ao
+JavaScript do navegador.
 
 ## Build e auditoria
 
