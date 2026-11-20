@@ -49,3 +49,5 @@ jobs:
         run: npm test
       - name: Run real MongoDB integration tests
         run: npm run test:db
+      - name: Audit production dependencies (high or critical)
+        run: npm audit --omit=dev --audit-level=high
