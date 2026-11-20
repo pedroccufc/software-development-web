@@ -60,8 +60,8 @@ export default class Dinner extends Component {
 					</article>
 				))}
 				<form className="form-inline mt-2 mt-md-0">
-					<button className="btn btn-outline-success my-2 my-sm-0" disabled={page === 1} onClick={this.prevPage}>Anterior</button>
-					<button className="btn btn-outline-success my-2 my-sm-0" disabled={page === dinnerInfo.pages} onClick={this.nextPage}>Próximo</button>
+					<button type="button" className="btn btn-outline-success my-2 my-sm-0" disabled={page === 1} onClick={this.prevPage}>Anterior</button>
+					<button type="button" className="btn btn-outline-success my-2 my-sm-0" disabled={page === dinnerInfo.pages} onClick={this.nextPage}>Próximo</button>
 				</form>
 			</div>
 		);
