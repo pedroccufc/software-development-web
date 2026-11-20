@@ -6,7 +6,7 @@ module.exports = {
 	// Lista Cafés da Manhã
 	async index(req, res) {
 		const { page = 1 } = req.query;
-		const breakfasts = await Breakfast.paginate({}, { page, limit: 1 });
+		const breakfasts = await Breakfast.paginate({}, { page, limit: 1, customLabels: { totalDocs: 'total', totalPages: 'pages' } });
 
 		return res.json(breakfasts);
 	},
@@ -34,7 +34,7 @@ module.exports = {
 
 	// apagar jantar
 	async destroy(req, res) {
-		await Breakfast.findByIdAndRemove(req.params.id);
+		await Breakfast.findByIdAndDelete(req.params.id);
 
 		return res.send();
 	}
