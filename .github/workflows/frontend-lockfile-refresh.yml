@@ -25,7 +25,9 @@ jobs:
         with:
           node-version: "22"
       - name: Resolve dependency versions
-        run: npm install --package-lock-only --ignore-scripts --no-audit --no-fund
+        run: |
+          rm -f package-lock.json
+          npm install --package-lock-only --ignore-scripts --no-audit --no-fund
       - name: Install from new lockfile
         run: npm ci --no-audit --no-fund
       - name: Build frontend with Vite
