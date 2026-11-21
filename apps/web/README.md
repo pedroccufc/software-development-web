@@ -46,6 +46,20 @@ etapa. O arquivo `vite.config.mjs` dá suporte temporário aos
 componentes legados com JSX em arquivos `.js`, evitando renomeações
 não relacionadas à correção de segurança.
 
-O projeto ainda depende de uma API externa e não possui uma suíte
-de testes automatizados de interface. O build em CI não substitui
-testes de navegação e comportamento no navegador.
+## Escopo acadêmico e limitações
+
+Este software foi desenvolvido exclusivamente como **projeto final da disciplina
+de Desenvolvimento de Software para Web**; não é um serviço de produção.
+
+A tela de entrada é **demonstrativa**: o botão "Entrar" apenas altera o estado
+da interface. Matrícula e senha não são validadas por servidor, não há sessão,
+controle de acesso ou autenticação real. **Não utilize essa tela para proteger
+dados ou ações restritas.** Não informe credenciais verdadeiras no formulário.
+
+O GitHub Actions executa build, auditoria npm e um teste de navegação em
+Chromium usando dados de refeições de uma API **simulada e isolada**.
+Esse teste exercita a entrada demonstrativa, as três seções do cardápio e
+a paginação, mas não comprova a integração com uma API real nem valida
+autenticação. Para uma utilização além de demonstração acadêmica, seriam
+necessários testes de ponta a ponta com o backend e uma implementação
+apropriada de autenticação e autorização.
