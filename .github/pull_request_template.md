@@ -1,7 +1,7 @@
 ## Contexto e objetivo
 
 <!-- Descreva o problema ou necessidade e, se houver, vincule uma issue. -->
-Closes #
+Issue relacionada (se houver): N/A
 
 ## O que mudou?
 
